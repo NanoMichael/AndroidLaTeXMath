@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/next_sample"
+        android:title="NEXT SAMPLE"/>
+
+    <item
+        android:id="@+id/debug"
+        android:checkable="true"
+        android:title="DEBUG"/>
+</menu>

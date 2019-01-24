@@ -1,0 +1,72 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion compileSdk
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        minSdkVersion minSdk
+        targetSdkVersion compileSdk
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets.main {
+        jni.srcDirs = []
+        jniLibs.srcDirs 'src/main/libs'
+    }
+
+    def ndkBuild = ndkBuildCmd()
+
+    task buildTeX(type: Exec) {
+        workingDir file('src/main')
+        commandLine ndkBuild
+    }
+
+    tasks.withType(JavaCompile) { task -> task.dependsOn buildTeX }
+
+    task cleanNative(type: Exec) {
+        workingDir file('src/main')
+        commandLine ndkBuild, 'clean'
+    }
+
+    clean.dependsOn cleanNative
+
+    tasks.withType(JavaCompile) {
+        it.doLast { task ->
+            println "COPY TEX RESOURCES INTO CLASSES"
+            copy {
+                from "${projectDir}/src/main/jni/tex/res"
+                into "${task.destinationDir}/io/nano/tex/res"
+            }
+        }
+    }
+}
+
+def ndkBuildCmd() {
+    if (System.env.ANDROID_NDK_ROOT != null) return System.env.ANDROID_NDK_ROOT
+    Properties prop = new Properties()
+    prop.load(project.rootProject.file('local.properties').newDataInputStream())
+    def ndkDir = prop.getProperty('ndk.dir', null)
+    if (ndkDir == null) throw new GradleException("NDK location not found.")
+    def ndkBuild = ndkDir + "/ndk-build"
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) ndkBuild += ".cmd"
+    return ndkBuild
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

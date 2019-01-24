@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion compileSdk
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        applicationId "io.nano.tex.test"
+        minSdkVersion minSdk
+        targetSdkVersion compileSdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    aaptOptions {
+        noCompress "tex"
+    }
+
+    tasks.withType(JavaCompile) { task ->
+        task.doFirst {
+            println 'COPY SAMPLES INTO ASSETS'
+            copy {
+                from "${project(':libtex').projectDir}/src/main/jni/tex/res/SAMPLES.tex"
+                into "${projectDir}/src/main/assets"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':libtex')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+}
