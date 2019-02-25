@@ -32,7 +32,7 @@ public final class ResManager {
     }
 
     private List<String> listRes() {
-        InputStream is = ResManager.class.getResourceAsStream("readme");
+        InputStream is = ResManager.class.getResourceAsStream("RES_README");
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         String line;
         List<String> res = new ArrayList<>();
@@ -91,4 +91,3 @@ public final class ResManager {
         }
     }
 }
-

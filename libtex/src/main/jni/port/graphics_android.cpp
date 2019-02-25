@@ -120,7 +120,7 @@ shared_ptr<TextLayout> TextLayout::create(const wstring& txt, const shared_ptr<F
 /******************************************* Graphics 2D ******************************************/
 
 /**
- * Keep in sync with com/welearn/tex/ActionRecorder
+ * Keep in sync with io/nano/tex/ActionRecorder
  */
 enum Action {
     ACT_setFont,
