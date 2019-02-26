@@ -2,8 +2,33 @@
 
 buildscript {
 
-    ext.compileSdk = 27
-    ext.minSdk = 14
+    ext {
+        compileSdk = 27
+        minSdk = 14
+
+        bintrayRepo = 'maven'
+        bintrayName = 'AndroidLaTeXMath'
+
+        bintrayRepo = 'maven'
+        bintrayName = 'AndroidLaTeXMath'
+
+        publishedGroupId = 'io.nano'
+        libraryName = 'AndroidLaTeXMath'
+        artifact = 'android-tex'
+
+        libraryDesc = 'An efficient LaTeX rendering library on Android.'
+
+        siteUrl = 'https://github.com/NanoMichael/AndroidLaTeXMath'
+        gitUrl = 'https://github.com/NanoMichael/AndroidLaTeXMath'
+
+        developerId = 'Nano'
+        developerName = 'Nano'
+        developerEmail = 'artiano@hotmail.com'
+
+        licenseName = 'The Apache Software License, Version 2.0'
+        licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        allLicenses = ["Apache-2.0"]
+    }
 
     repositories {
         google()
@@ -12,6 +37,9 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
+
+        classpath "com.github.dcendents:android-maven-gradle-plugin:2.1"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
