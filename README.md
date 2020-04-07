@@ -1,6 +1,6 @@
 # ![logo](readme/logo.svg)
 
-Library for displaying LaTeX formulas on Android. It use [cLaTeXMath](https://github.com/NanoMichael/AndroidLaTeXMath) to parse and render LaTeX code. The picture below demonstrate the demo application.
+Library for displaying LaTeX formulas on Android. It use [cLaTeXMath](https://github.com/NanoMichael/cLaTeXMath) to parse and render LaTeX code. The picture below demonstrate the demo application.
 
 ![demo](readme/example.jpg)
 
@@ -77,6 +77,7 @@ ndk.dir=/your/NDK/dir
 Update the latest `C++` implementation using `git`:
 
 ```sh
+git submodule init --recursive
 git submodule update --remote
 ```
 
