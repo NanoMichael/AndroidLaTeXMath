@@ -17,7 +17,7 @@ implementation 'io.nano:android-tex:1.0.0'
 Add the following rule to your proguard config file:
 
 ```
--keep class io.nano.tex.**
+-keep class io.nano.tex.** {*;}
 ```
 
 # How to use
